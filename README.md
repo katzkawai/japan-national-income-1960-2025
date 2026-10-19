@@ -4,6 +4,8 @@
 World Bank Open Data（World Development Indicators）から取得した公開データをもとに、成長の減速、
 円建てとドル建ての乖離、1人当たりの豊かさ、世界での順位とシェアの変化を1ページで読み解きます。
 
+**公開URL: <https://katzkawai.org/japan-national-income-1960-2025/>**
+
 ![ヒーロー画像](assets/og.png)
 
 ## 収録している内容
