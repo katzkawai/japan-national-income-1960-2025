@@ -1,5 +1,10 @@
 # 日本の国民所得 1960–2025
 
+[![Built with DeepSeek V4.1 Flash 1017](https://img.shields.io/badge/Built%20with-DeepSeek%20V4.1%20Flash%201017-4D6BFE.svg)](https://api-docs.deepseek.com/quick_start/pricing)
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-2ea44f.svg)](https://katzkawai.org/japan-national-income-1960-2025/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Data: CC BY 4.0](https://img.shields.io/badge/Data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+
 日本の GDP・GNI（国民総所得）の65年分の推移を可視化する、依存ライブラリを同梱した静的サイトです。
 World Bank Open Data（World Development Indicators）から取得した公開データをもとに、成長の減速、
 円建てとドル建ての乖離、1人当たりの豊かさ、世界での順位とシェアの変化を1ページで読み解きます。
@@ -94,6 +99,22 @@ gh api -X POST "repos/{owner}/{repo}/pages" -f "source[branch]=main" -f "source[
 - **円建てGDPは参考値**: ドル建て名目GDPを期間平均為替レートで換算したもので、国民経済計算（SNA）の公表値とは一致しません
 - **順位は比較可能な年のみ**: 報告国が少ない速報年は除外し、最新は2024年
 - **購買力平価** は2021年基準の国際ドルで、国際比較プログラムの改定により水準が変わります
+
+## 構築について
+
+本プロジェクト（データ取得スクリプト、可視化ロジック、ページの文章、このドキュメント）は、
+**DeepSeek V4.1 Flash 1017** を用いて対話的に設計・実装しました。
+
+| 項目 | 値 |
+| --- | --- |
+| 表示名 | DeepSeek V4.1 Flash 1017 |
+| モデルID | `deepseek-flash` |
+| モデルバージョン | `DeepSeek-V4.1-Flash-1017` |
+| 実行環境 | DeepSeek Harness |
+
+モデルの選定・料金は [DeepSeek API Docs — Models & Pricing](https://api-docs.deepseek.com/quick_start/pricing) を参照してください。
+生成物であるコードと文章は MIT License の下で自由に利用できますが、内容の正確性については
+[データについて](#データについて)の注意点を確認してください。
 
 ## ライセンス
 

@@ -302,6 +302,36 @@ ul, ol { margin: 0; }
 .data-table thead th:first-child { z-index: 3; }
 .data-table tbody tr:hover td { background: var(--accent-soft); }
 
+/* ---------- build credit ---------- */
+.build-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+  border-radius: 999px;
+  padding: 1px 9px;
+  margin-right: 6px;
+  white-space: nowrap;
+  vertical-align: 1px;
+}
+.build-line { border-top: 1px dashed var(--line); padding-top: 10px; }
+.footer-credit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+  font-size: .8rem;
+  color: var(--ink-2);
+  padding-top: 10px;
+  margin-top: 2px;
+  border-top: 1px solid var(--line);
+}
+.footer-credit code { font-size: .78em; }
+
 /* ---------- footer ---------- */
 .site-footer { border-top: 1px solid var(--line); padding: 34px 0 54px; background: var(--bg); }
 .footer-inner { display: grid; gap: 8px; }
