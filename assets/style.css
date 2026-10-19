@@ -173,6 +173,7 @@ ul, ol { margin: 0; }
 }
 .kpi-value .unit { font-size: .55em; font-weight: 600; color: var(--muted); margin-left: 3px; letter-spacing: 0; }
 .kpi-foot { font-size: .78rem; color: var(--muted); line-height: 1.5; }
+.nowrap { white-space: nowrap; }
 .kpi-foot strong { color: var(--ink-2); font-variant-numeric: tabular-nums; }
 .kpi-foot .up { color: var(--good); }
 .kpi-foot .down { color: var(--bad); }

@@ -11,7 +11,7 @@ World Bank Open Data（World Development Indicators）から取得した公開�
 
 **公開URL: <https://katzkawai.org/japan-national-income-1960-2025/>**
 
-![ヒーロー画像](assets/og.png)
+![サイトのスクリーンショット](docs/preview.png)
 
 ## 収録している内容
 
@@ -35,12 +35,18 @@ World Bank Open Data（World Development Indicators）から取得した公開�
 ├── assets/
 │   ├── style.css           # スタイル（ライト/ダーク対応）
 │   ├── app.js              # 可視化ロジック
-│   └── og.png              # OGP 画像
+│   ├── icon.svg            # アイコンの原版（512×512）
+│   ├── apple-touch-icon.png
+│   └── og.png              # OGP 画像（1200×630）
+├── docs/
+│   └── preview.png         # README 用スクリーンショット
 ├── data/
 │   ├── data.json           # 生成データ（機械可読）
 │   └── data.js             # 同じ内容を window 変数として読み込む版
 ├── scripts/
-│   └── fetch_data.py       # データ取得・加工スクリプト（標準ライブラリのみ）
+│   ├── fetch_data.py       # データ取得・加工スクリプト（標準ライブラリのみ）
+│   └── build_images.sh     # アイコン・OGP・スクリーンショットの再生成
+├── favicon.ico
 ├── vendor/
 │   └── chart.umd.min.js    # Chart.js 4.4.7
 ├── .github/workflows/pages.yml
@@ -59,6 +65,20 @@ python3 scripts/fetch_data.py
 World Bank API から全指標を取得し、`data/data.json` と `data/data.js` を上書きします。
 2回目以降は `data/cache/` の生レスポンスを使うため数秒で終わります。
 `--no-cache` を付けると再取得します（`python3 scripts/fetch_data.py --no-cache`）。
+
+## 画像アセットの再生成
+
+アイコン・OGP 画像・README 用スクリーンショットは ImageMagick と Chrome で生成します。
+
+```bash
+./scripts/build_images.sh
+```
+
+- `assets/icon.svg` を 512px で描画し、`favicon.ico`（16/32/48）と `assets/apple-touch-icon.png`（180px）を作成
+- 1200×630 の OGP 画像 `assets/og.png` と、1200×900 の `docs/preview.png` を撮影
+- 生成物は `-strip` と PNG 圧縮レベル 9 で軽量化
+
+必要なもの: `convert` / `identify`（ImageMagick）、`google-chrome`
 
 ## ローカルで確認
 

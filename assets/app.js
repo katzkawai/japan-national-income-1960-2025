@@ -695,7 +695,7 @@
         label: '名目GDP ピーク比（ドル建て）',
         value: fmtSignedPct(pctChange(usdPeak.value, usdLast.value), 1),
         unit: '',
-        foot: `${usdPeak.year}年 ${nf2.format(usdPeak.value / 1e12)}兆ドル → <strong>${nf2.format(usdLast.value / 1e12)}兆ドル</strong>`,
+        foot: `<span class="nowrap">${usdPeak.year}年 ${nf2.format(usdPeak.value / 1e12)}兆ドル</span> → <strong class="nowrap">${nf2.format(usdLast.value / 1e12)}兆ドル</strong>`,
         tone: 'negative',
       },
       {
