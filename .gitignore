@@ -1,0 +1,10 @@
+# データ取得時の生レスポンスキャッシュ
+data/cache/
+
+# 開発用のスクリーンショット
+.preview/
+
+# OS / エディタ
+.DS_Store
+Thumbs.db
+*.swp

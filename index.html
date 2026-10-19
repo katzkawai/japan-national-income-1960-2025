@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="ja" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>日本の国民所得 1960–2025 | データで見る65年</title>
+<meta name="description" content="日本のGDP・GNI（国民総所得）の65年分の推移を、World Bank Open Data をもとに可視化。成長の減速、円建てとドル建ての乖離、一人当たりの豊かさ、世界での順位とシェアの変化を分析します。">
+<meta name="author" content="Japan National Income Dashboard">
+<meta property="og:type" content="website">
+<meta property="og:title" content="日本の国民所得 1960–2025">
+<meta property="og:image" content="assets/og.png">
+<meta property="og:description" content="GDP・GNIの65年を可視化。成長の終わり、円安が映す停滞、世界シェアの縮小をデータで読む。">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/og.png">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231F4FD8'/%3E%3Cpath d='M7 22l6-7 4 4 8-11' stroke='%23fff' stroke-width='2.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">本文へスキップ</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="#top" aria-label="ページ先頭へ">
+      <span class="brand-mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20"><path d="M4 18l5-6 3.5 3.5L20 5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="brand-text">日本の国民所得<small>1960–2025</small></span>
+    </a>
+    <nav class="site-nav" aria-label="章">
+      <a href="#growth">成長</a>
+      <a href="#nominal">円とドル</a>
+      <a href="#percapita">一人当たり</a>
+      <a href="#world">世界での位置</a>
+      <a href="#structure">所得の使い道</a>
+      <a href="#findings">分析</a>
+      <a href="#data">データ</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="配色を切り替える" aria-pressed="false">
+      <svg class="icon-sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <svg class="icon-moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 019.5 4a8.5 8.5 0 1010.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ── Hero ───────────────────────────────────────────── -->
+  <section class="hero" id="top">
+    <div class="wrap hero-inner">
+      <p class="eyebrow">World Bank Open Data · World Development Indicators</p>
+      <h1>日本の国民所得<br><span class="hero-range">1960–2025</span></h1>
+      <p class="lead">
+        高度経済成長、バブルの膨張と崩壊、そして「失われた30年」。1960年から2025年までの65年分のGDP・GNI（国民総所得）を
+        1ページで可視化し、日本経済がどこで成長を止め、いま世界のどこにいるのかを読み解きます。
+      </p>
+      <dl class="hero-meta">
+        <div><dt>対象期間</dt><dd>1960–2025年</dd></div>
+        <div><dt>指標</dt><dd>GDP・GNI・1人当たり・購買力平価</dd></div>
+        <div><dt>データ更新</dt><dd id="meta-updated">—</dd></div>
+        <div><dt>出典</dt><dd><a href="https://data.worldbank.org/country/japan" target="_blank" rel="noopener">World Bank</a>（CC BY 4.0）</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ── KPI ────────────────────────────────────────────── -->
+  <section class="wrap kpi-section" aria-labelledby="kpi-heading">
+    <h2 id="kpi-heading" class="visually-hidden">主要指標</h2>
+    <div class="kpi-grid" id="kpi-grid"><!-- JS --></div>
+  </section>
+
+  <!-- ── 1. 成長 ─────────────────────────────────────────── -->
+  <section class="chapter" id="growth">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">01</p>
+        <h2>成長は、いつ終わったのか</h2>
+        <p class="chapter-lead">
+          実質GDPは1960年から2025年までに約<span data-stat="real-multiple">8</span>倍になった。
+          しかし同じ「成長」でも、1973年までとそれ以降では年平均成長率が桁違いに違う。
+          対数軸で見ると、成長の傾きが変わる地点がはっきりと読み取れる。
+        </p>
+      </header>
+
+      <div class="grid grid-2">
+        <figure class="card">
+          <figcaption>
+            <h3>実質GDPの推移（1960年=100・対数軸）</h3>
+            <p class="fig-note">2015年価格の実質GDP。縦軸を対数にすると、一定の成長率が直線として現れる。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:380px"><canvas id="chart-real" aria-label="実質GDP指数の推移"></canvas></div>
+          <div class="legend" id="legend-era"></div>
+        </figure>
+
+        <figure class="card">
+          <figcaption>
+            <h3>10年平均の実質成長率</h3>
+            <p class="fig-note">各年代の年平均成長率（%）。2020年代は2020–2025年の平均。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:380px"><canvas id="chart-decades" aria-label="10年平均実質成長率"></canvas></div>
+        </figure>
+      </div>
+
+      <div class="callout">
+        <p>
+          <strong>1973年が分岐点。</strong>
+          第一次石油危機までの年平均成長率は10.4%、1970年代以降は4%前後、
+          1990年代に入ると1%台、2000年代には0.5%まで落ちた。
+          実質GDPの水準は増え続けているが、<em>傾き</em>は1973年と1991年に段階的に寝ている。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. 円とドル ──────────────────────────────────────── -->
+  <section class="chapter alt" id="nominal">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">02</p>
+        <h2>円で見れば過去最高、ドルで見れば3割減</h2>
+        <p class="chapter-lead">
+          同じ名目GDPでも、円建てとドル建てでは景色がまったく違う。
+          円建ては2025年に過去最高を更新した一方、ドル建ては2012年のピークから約30%減った。
+          この乖離を生んでいるのは、成長率の差と為替である。
+        </p>
+      </header>
+
+      <figure class="card card-wide">
+        <figcaption>
+          <h3>名目GDP：円建て（左軸）とドル建て（右軸）</h3>
+          <p class="fig-note" id="fx-note">円建ては期間平均為替レートで換算した参考値。ドル建ての山谷は為替の影響を強く受ける。</p>
+        </figcaption>
+        <div class="chart-box" style="--h:420px"><canvas id="chart-nominal" aria-label="名目GDPの円建て・ドル建て推移"></canvas></div>
+      </figure>
+
+      <div class="callout callout-split">
+        <div>
+          <p class="stat-line"><span data-stat="jpy-peak">—</span></p>
+          <p class="stat-caption">2025年の名目GDP（円建て）。過去最高。</p>
+        </div>
+        <div>
+          <p class="stat-line negative"><span data-stat="usd-vs-peak">—</span></p>
+          <p class="stat-caption">ドル建て名目GDPのピーク（2012年）比。</p>
+        </div>
+        <p class="callout-body">
+          ドル建てのピークは2012年。この年は1ドル=79.8円の超円高で、円建ての水準は今より低かった。
+          つまりドル建ての「減少」は経済の縮小だけでなく、<strong>円の評価が半分になったこと</strong>を映している。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. 一人当たり ────────────────────────────────────── -->
+  <section class="chapter" id="percapita">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">03</p>
+        <h2>一人当たりの豊かさは、伸びたのか</h2>
+        <p class="chapter-lead">
+          人口が減れば、総額が横ばいでも1人当たりは増える。だが日本の1人当たりGNIは
+          2012年をピークに減少し、購買力平価で見ても伸びは緩やかだ。
+          為替換算と購買力平価の差は、円の「対外購買力」の低下を示している。
+        </p>
+      </header>
+
+      <div class="grid grid-2">
+        <figure class="card">
+          <figcaption>
+            <h3>1人当たりGNI：為替換算と購買力平価</h3>
+            <p class="fig-note">名目ドル建て（為替換算）とPPP（2021年基準の国際ドル）。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:400px"><canvas id="chart-percapita" aria-label="1人当たりGNIの推移"></canvas></div>
+        </figure>
+
+        <figure class="card">
+          <figcaption>
+            <h3>1人当たりGDPの対米比率（PPP）</h3>
+            <p class="fig-note">アメリカを100としたときの日本の水準（%）。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:400px"><canvas id="chart-vsus" aria-label="1人当たりGDPの対米比率"></canvas></div>
+          <p class="fig-foot" id="vsus-foot"></p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 4. 世界での位置 ──────────────────────────────────── -->
+  <section class="chapter alt" id="world">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">04</p>
+        <h2>世界の中での位置は、どう変わったか</h2>
+        <p class="chapter-lead">
+          1990年代、日本の1人当たりGNIは世界で5位、OECD加盟国では3位だった。
+          2024年には世界32位、OECD内21位まで下がっている。
+          世界GDPに占めるシェアも、1994年の18.2%から2025年には3.7%へ縮小した。
+        </p>
+      </header>
+
+      <div class="grid grid-2">
+        <figure class="card">
+          <figcaption>
+            <h3>世界GDPに占めるシェア</h3>
+            <p class="fig-note">日本と中国の名目GDPが、世界全体の名目GDPに占める割合（%）。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:400px"><canvas id="chart-share" aria-label="世界GDPシェアの推移"></canvas></div>
+        </figure>
+
+        <figure class="card">
+          <figcaption>
+            <h3>1人当たりGNIの世界順位</h3>
+            <p class="fig-note" id="rank-note">順位が上にあるほど上位。比較可能な国のみで算出。</p>
+          </figcaption>
+          <div class="chart-box" style="--h:400px"><canvas id="chart-rank" aria-label="1人当たりGNIの世界順位"></canvas></div>
+        </figure>
+      </div>
+
+      <div class="rank-table-wrap">
+        <h3 class="mini-heading">2024年の上位12か国と日本</h3>
+        <div class="rank-layout">
+          <table class="mini-table" id="rank-table"><!-- JS --></table>
+          <p class="rank-note">
+            上位にはバミューダ、ケイマン諸島、フェロー諸島など、人口が少なく金融や漁業に依存する
+            高所得地域も並ぶ。ここでの順位は為替換算の名目値であり、物価水準の違いは反映されていない。
+            購買力平価で測った比較は、上の「1人当たりGNI」のチャートを参照。
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 5. 所得の使い道 ──────────────────────────────────── -->
+  <section class="chapter" id="structure">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">05</p>
+        <h2>所得は、何に使われるようになったのか</h2>
+        <p class="chapter-lead">
+          GDPの使い道は、この半世紀で大きく組み替わった。
+          1970年にはGDPの44%が投資（総資本形成）に向かい、消費は45%だった。
+          現在は投資が28%、消費が53%へ。成長を牽引した投資の比率が、
+          ほぼ半分になっている。
+        </p>
+      </header>
+
+      <figure class="card card-wide">
+        <figcaption>
+          <h3>家計最終消費支出と総資本形成（GDP比・%）</h3>
+          <p class="fig-note">総資本形成は在庫変動を含む。合計はGDPの100%にならない（政府支出・純輸出が残る）。</p>
+        </figcaption>
+        <div class="chart-box" style="--h:400px"><canvas id="chart-structure" aria-label="家計消費と資本形成のGDP比"></canvas></div>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── 6. 分析 ─────────────────────────────────────────── -->
+  <section class="chapter alt" id="findings">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">06</p>
+        <h2>データから読み取れること</h2>
+        <p class="chapter-lead">
+          以下は、このページで可視化したデータから直接計算できる事実である。
+          数値はすべて同梱のデータファイルから自動生成している。
+        </p>
+      </header>
+      <ol class="findings" id="findings-list"><!-- JS --></ol>
+    </div>
+  </section>
+
+  <!-- ── データ ──────────────────────────────────────────── -->
+  <section class="chapter" id="data">
+    <div class="wrap">
+      <header class="chapter-head">
+        <p class="chapter-no">07</p>
+        <h2>データと方法</h2>
+      </header>
+
+      <div class="grid grid-2">
+        <div class="card prose">
+          <h3>出典</h3>
+          <p>
+            World Bank Open Data（World Development Indicators）の国別指標APIから取得。
+            取得日 <span id="meta-retrieved">—</span>、API最終更新 <span id="meta-api">—</span>。
+          </p>
+          <ul>
+            <li>名目GDP・GNI、1人当たり値：<code>NY.GDP.MKTP.CD</code> / <code>NY.GNP.MKTP.CD</code> / <code>NY.GDP.PCAP.CD</code> / <code>NY.GNP.PCAP.CD</code></li>
+            <li>実質GDP（2015年価格）：<code>NY.GDP.MKTP.KD</code></li>
+            <li>購買力平価：<code>NY.GNP.PCAP.PP.CD</code>（2021年基準の国際ドル）</li>
+            <li>為替レート：<code>PA.NUS.FCRF</code>（期間平均）</li>
+            <li>消費・投資：<code>NE.CON.PRVT.ZS</code> / <code>NE.GDI.TOTL.ZS</code></li>
+          </ul>
+          <p class="small">
+            ライセンスは CC BY 4.0。本ページの解釈・分析はデータ提供元の見解ではない。
+          </p>
+        </div>
+
+        <div class="card prose">
+          <h3>注意点</h3>
+          <ul>
+            <li><strong>GNI＝旧「国民所得」</strong>。GDPに海外からの純要素所得を加えた分配面の指標で、本ページの主役。</li>
+            <li><strong>円建てGDPは参考値</strong>。ドル建て名目GDPを期間平均為替で換算しており、国民経済計算（SNA）の公表値とは一致しない。</li>
+            <li><strong>順位は比較可能な年のみ</strong>。報告国数が少ない速報年は除外し、2024年を最新としている。</li>
+            <li><strong>購買力平価は改定される</strong>。国際比較プログラムの基準年更新で水準が変わる。</li>
+          </ul>
+        </div>
+      </div>
+
+      <details class="data-table-wrap">
+        <summary>年次データ表を開く（CSV / JSON もダウンロード可）</summary>
+        <div class="data-actions">
+          <a class="button" href="data/data.json" download>JSON をダウンロード</a>
+          <button class="button" type="button" id="download-csv">CSV をダウンロード</button>
+        </div>
+        <div class="table-scroll">
+          <table class="data-table" id="data-table"><!-- JS --></table>
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>
+      日本の国民所得 1960–2025 — データ: <a href="https://data.worldbank.org/country/japan" target="_blank" rel="noopener">World Bank Open Data</a>（CC BY 4.0）／
+      コード: MIT License
+    </p>
+    <p class="small">
+      本ページは公開データの可視化であり、投資その他の助言ではない。数値は取得時点のもので、遡及改定により変わりうる。
+    </p>
+  </div>
+</footer>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script src="data/data.js"></script>
+<script src="assets/app.js"></script>
+</body>
+</html>
